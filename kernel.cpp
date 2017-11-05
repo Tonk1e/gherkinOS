@@ -105,7 +105,7 @@ extern "C" void callConstructors()
 		(*i)();
 }
 
-extern "C" void kernelmain()
+extern "C" void kernelmain(const void* multiboot_structure)
 {
 bool loop = true;
 terminal_initialize();
