@@ -1,21 +1,20 @@
-[bits 32]
-global start
-extern _kernel_main 
-section .mbHeader
+.set MAGIC, 0xbadb002
+.set FLAGS, (1<<0 | 1<<1)
+.set CHECKSUM, -(MAGIC + FLAGS)
 
-align 0x4
- 
-MODULEALIGN equ  1<<0	MEMINFO     equ  1<<1                   
-FLAGS       equ  MODULEALIGN | MEMINFO  
-MAGIC       equ    0x1BADB002           
-CHECKSUM    equ -(MAGIC + FLAGS)        
- 
-MultiBootHeader:
-   dd MAGIC
-   dd FLAGS
-   dd CHECKSUM
- 
+.section .multiboot
+	.long MAGIC
+	.long FLAGS
+	.long CHECKSUM
 
-start:
-push ebx 
-call _kernel_main
+.section .text
+.extern .text
+.extern kernel_main
+.global loader
+
+loader:
+	push %eax
+	push %ebx
+	call kernel_main
+
+.section .bss
