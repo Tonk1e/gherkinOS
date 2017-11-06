@@ -105,13 +105,11 @@ extern "C" void callConstructors()
 		(*i)();
 }
 
-extern "C" void kernelmain(const void* multiboot_structure)
+extern "C" void kernelmain(const void* multiboot_structure, uint32_t)
 {
-bool loop = true;
 terminal_initialize();
-while (loop){
-	terminal_writestring("gherkinOS blud init.");
-}
+terminal_writestring("gherkinOS blud init.");
+
 
 for(;;);
 }
