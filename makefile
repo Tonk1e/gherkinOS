@@ -27,7 +27,7 @@ kernel.iso: kernel.iso
 
 run: kernel.iso
 	(killall VirtualBox && sleep 1) || true
-	VirtualBox --startvm 'PickleOS' &
+	VirtualBox --startvm 'gherkinOS' &
 
 .PHONY: clean
 clean:
